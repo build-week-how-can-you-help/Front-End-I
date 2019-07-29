@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { setToken } from './utilities/token';
 
-import thunk from 'react-thunk';
+import thunk from 'redux-thunk';
 import reducer from './store/reducers';
 
 import App from './App';
@@ -15,7 +15,8 @@ import './scss/index.scss';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  reducer
+  reducer,
+  composeEnhancers(applyMiddleware(thunk, setToken))
 )
 const AppWithRouter = withRouter(App);
 
