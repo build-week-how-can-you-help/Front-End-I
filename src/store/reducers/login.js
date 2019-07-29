@@ -14,21 +14,21 @@ export const login = (state = initialState, action) => {
         ...state,
         error: null,
         isLoggingIn: true,
-      }
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
         error: null,
         nonProfitList: action.payload,
         isLoggingIn: false
-      }
+      };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.payload,
         isLoggingIn: false
-      }
+      };
     default:
-      return state,
-  };
+      return state;
+  }
 }
