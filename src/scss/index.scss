@@ -1,0 +1,45 @@
+@import './vars';
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: $color-bg;
+  color: #333;
+  font-family: $font-stack-default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+button {
+  cursor: pointer;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.error {
+  border-color: #C00 !important;
+}
+
+.error-msg {
+  position: absolute;
+  color: #c00;
+  font-style: italic;
+  bottom: -1.375em;
+  left: 0.625em;
+}
+
+@import './App';
+@import './nav';
+@import './login';
+@import './logout';
+@import './dashboard';
+@import './nonProfitList';

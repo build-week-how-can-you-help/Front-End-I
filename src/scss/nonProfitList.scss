@@ -1,0 +1,61 @@
+.search-bar {
+  max-width: 56.25em;
+  margin: 1.875em auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  button, input {
+    border-radius: 10px;
+    border: none;
+  }
+
+  button {
+    padding: 0.25rem 1.25rem;
+    background: $color-link;
+    white-space: nowrap;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .add-non-profit {
+    margin-left: 1.25rem;
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+
+    .query-container {
+      width: calc(100% - 1.25rem);
+      margin-right: 1.25rem;
+      position: relative;
+
+      label[for="query"] {
+        position: absolute;
+        z-index: -1;
+      }
+
+      input {
+        width: 100%;
+        max-width: calc(100% - 1.25rem);
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.25em;
+        border: 1px solid $color-primary;
+
+        &::placeholder {
+          color: #ccc;
+          font-weight: bold;
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    button {
+      background: $color-primary;
+    }
+  }
+}
