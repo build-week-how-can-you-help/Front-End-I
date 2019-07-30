@@ -1,6 +1,58 @@
+@import 'mixins';
+
 .dashboard {
   padding-top: 1.875em;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+
+  section {
+    max-width: 56.25em;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    div {
+      width: calc(50% - 0.625em);
+
+      &:first-child {
+        margin-right: 1.25rem;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      ul {
+        padding: 0;
+        text-align: left;
+
+        li {
+          list-style-type: none;
+        }
+      }
+
+      dl {
+        padding: 1.25rem;
+        border: 1px solid $color-primary;
+        @include rounded-corners;
+
+        dt, dd {
+          font-size: 1rem;
+          line-height: 1em;
+          display: inline-block;
+        }
+
+        dt {
+          margin-right: 1.25rem;
+        }
+
+        dd {
+          width: 20%;
+          margin: 0 0.625rem 0 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }

@@ -3,8 +3,8 @@ import Loader from 'react-loader-spinner';
 
 const Logout = props => {
   console.log('logout props', props);
-  useEffect(() => {
-    setTimeout(props => {
+  useEffect( () => {
+    setTimeout( () => {
       localStorage.clear();
       props.history.push("/"); }, 1000)
   }, []);

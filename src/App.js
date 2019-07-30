@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import PrivateRoute from './utilities/PrivateRoute';
 
 import Navigation from './components/Navigation';
@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Navigation />
 
-      <Route exact path="/" component={Login} />
+      <Route exact path="/" render={ props => localStorage.getItem("token") ? <Dashboard {...props} /> : <Login {...props} /> } />
       <PrivateRoute path="/home" component={Dashboard} />
       <PrivateRoute path="/search" component={NonProfitList} />
       <PrivateRoute path="/logout" component={Logout} />
