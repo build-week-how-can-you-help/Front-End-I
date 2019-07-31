@@ -25,6 +25,10 @@ button {
   }
 }
 
+main {
+  padding-bottom: 1.25rem;
+}
+
 .error {
   border-color: #C00 !important;
 }
@@ -39,7 +43,9 @@ button {
 
 @import './App';
 @import './nav';
+@import './footer';
 @import './login';
 @import './logout';
 @import './dashboard';
 @import './nonProfitList';
+@import './userDisplay'

@@ -14,6 +14,20 @@ export const query = (state = initialState, action) => {
         error: null,
         isQuerying: true
       }
+      case QUERY_SUCCESS:
+        return {
+          ...state,
+          error: null,
+          nonProfitList: action.payload,
+          isQuerying: true
+        }
+        case QUERY_FAIL:
+          return {
+            ...state,
+            error: action.payload,
+            nonProfitList: [],
+            isQuerying: true
+          }
     default:
       return state;
   }

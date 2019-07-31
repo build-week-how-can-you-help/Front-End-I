@@ -4,8 +4,17 @@
   min-width: 100vw;
   min-height: calc(100vh - 2.5rem);
   display: flex;
+  flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+
+  .logo {
+    $measure: 300px;
+    $margin: 1.875em;
+    width: $measure;
+    height: $measure;
+    margin: 0 $margin $margin 0;
+  }
 
   .login-container {
     margin-bottom: 2.5rem;

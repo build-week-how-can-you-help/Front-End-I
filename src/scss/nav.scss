@@ -7,6 +7,28 @@ nav {
   align-items: center;
 
   ul {
+    position: relative;
+  }
+
+  .logo-li {
+    position: absolute;
+    left: 0;
+    top: -6px;
+  }
+
+  .logo {
+    $measure: 1.875rem;
+    
+    width: $measure;
+    height: $measure;
+    margin: 0;
+    background: transparent url('../imgs/howcanyouhelp-logo-32x32.png') no-repeat center center;
+    background-size: $measure $measure;
+    color: transparent;
+    font: 0/0 a;
+  }
+
+  ul {
     width: 100%;
     max-width: 62.5rem;
     margin: 0 auto;

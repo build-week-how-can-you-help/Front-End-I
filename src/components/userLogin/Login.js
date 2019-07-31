@@ -5,12 +5,15 @@ import * as Yup from 'yup';
 
 import { loginHandler } from '../../store/actions';
 
+import logo from '../../imgs/howcanyouhelp-logo.png';
+
 
 class Login extends React.Component {
 
   render() {
     return(
       <main className="login">
+        <img src={logo} alt="How Can You Help? Logo" className="logo" />
         <div className="login-container">
           <h1>Login</h1>
           <Formik
@@ -21,7 +24,7 @@ class Login extends React.Component {
             onSubmit={ (values, formikBag) => {
               formikBag.setSubmitting(true);
               this.props.loginHandler(values)
-                .then(res => res && this.props.history.push("/home"));
+                .then(res => res && formikBag.setSubmitting(false), this.props.history.push("/home"));
             }}
             validationSchema={ Yup.object().shape({
               username: Yup.string()
