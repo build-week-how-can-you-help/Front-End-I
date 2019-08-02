@@ -45,6 +45,7 @@ export const loginHandler = (value) => dispatch => {
     .then(res=> {
       // console.log('login success',res);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data.access_token });
+      dispatch( getAllUsers(res.data.access_token) );
       return true;
     })
     .catch(err => {
@@ -56,7 +57,7 @@ export const loginHandler = (value) => dispatch => {
 export const searchQuery = value => dispatch => {
   // console.log('START SEARCH QUERY', value);
   dispatch({ type: QUERY_START });
-  let obj =`description_text=${value}`
+  let obj =`description_text=${value}`;
   return axios.post(`${hostURL2}/find`,obj,{
     headers:{
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -77,7 +78,7 @@ export const addNonProfit = values => dispatch => {
   dispatch({ type: ADD_NONPROFIT_START });
   return axiosWithAuth().post(`${hostURL}/addnonprofit`, values)
     .then(res => {
-      console.log(res);
+      // console.log(res);
       let savedWebsites = [];
       if(localStorage.getItem('addedWebsites')) {
         savedWebsites = localStorage.getItem('addedWebsites');
@@ -87,7 +88,7 @@ export const addNonProfit = values => dispatch => {
       return true;
     })
     .catch( err => {
-      console.log(err);
+      // console.log(err);
       dispatch({ type: ADD_NONPROFIT_FAIL, payload: err });
     })
 }
@@ -96,12 +97,12 @@ export const updateNonProfit = value => dispatch => {
   dispatch({ type: UPDATE_NONPROFIT_START });
   return axiosWithAuth().put(`${hostURL}/nonprofit/${value.id}`)
     .then( res => {
-      console.log(res);
+      // console.log(res);
       dispatch({ type: UPDATE_NONPROFIT_SUCCESS, payload: res.data });
       return true;
     })
     .catch( err => {
-      console.log(err);
+      // console.log(err);
       dispatch({ type: UPDATE_NONPROFIT_FAIL, payload: err });
     })
 }
@@ -110,12 +111,12 @@ export const removeNonProfit = id => dispatch => {
   dispatch({ type: DELETE_NONPROFIT_START });
   return axiosWithAuth().delete(`${hostURL}/nonprofit/${id}`)
     .then( res => {
-      console.log(res);
+      // console.log(res);
       dispatch({ type: DELETE_NONPROFIT_SUCCESS, payload: res.data });
       return true;
     })
     .catch( err => {
-      console.log(err);
+      // console.log(err);
       dispatch({ type: DELETE_NONPROFIT_FAIL, payload: err });
     })
 }
@@ -134,17 +135,39 @@ export const getCurrentUserInfo = () => dispatch => {
     })
 }
 
-export const getAllUsers = () => dispatch => {
+export const getAllUsers = (token = 0) => dispatch => {
+  // console.log('GET ALL USERS');
   dispatch({ type: GET_USERS_START });
-  return axiosWithAuth().get(`${hostURL}/users/users`)
-    .then( res => {
-      // console.log('getAllUsers success');
-      dispatch({ type: GET_USERS_SUCCESS, payload: res.data });
-    })
-    .catch( err => {
-      // console.log(err.response);
-      dispatch({ type: GET_USERS_FAIL, payload: err.response });
-    })
+  // console.log("GET ALL USERS token");
+  if(token !== 0) {
+    // console.log('TOKEN', token);
+    // console.log('token sent');
+    return axios.get(`${hostURL}/users/users`,{
+      headers:{
+        'Authorization': `Bearer ${token}`,
+        'Content-Type':  'application/x-www-form-urlencoded',
+        'Accept': `*/*`
+        }
+      })
+      .then( res => {
+        // console.log('GET ALL USERS SUCCEESS');
+        dispatch({ type: GET_USERS_SUCCESS, payload: res.data });
+      })
+      .catch( err => {
+        // console.log(err.response);
+        dispatch({ type: GET_USERS_FAIL, payload: err.response });
+      })
+  } else {
+    return axiosWithAuth().get(`${hostURL}/users/users`)
+      .then( res => {
+        // console.log('GET ALL USERS SUCCEESS');
+        dispatch({ type: GET_USERS_SUCCESS, payload: res.data });
+      })
+      .catch( err => {
+        // console.log(err.response);
+        dispatch({ type: GET_USERS_FAIL, payload: err.response });
+      })
+  }
 }
 
 export const addNewUser = values => dispatch => {
