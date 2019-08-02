@@ -148,9 +148,9 @@ export const getAllUsers = () => dispatch => {
 }
 
 export const addNewUser = values => dispatch => {
-  console.log('update',values);
+  console.log('add new',values);
   dispatch({ type: ADD_NEW_USER_START });
-  return axiosPostAuth().post(`${hostURL}/users/user/`)
+  return axiosPostAuth().post(`${hostURL}/users/user/`, values)
     .then(res => {
       // console.log('adduser success',res);
       dispatch({ type: ADD_NEW_USER_SUCCESS, payload: res.data });

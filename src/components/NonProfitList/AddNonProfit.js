@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+
+import { addNonProfit } from '../../store/actions';
 
 class AddNonProfit extends React.Component {
   
@@ -19,8 +22,10 @@ class AddNonProfit extends React.Component {
             }}
             onSubmit={ (values, formikBag) => {
               formikBag.setSubmitting(true);
-              // props.updateNonProfit(values)
-              //   .then(res => res && formikBag.setSubmitting(false), props.history.push("/search"));
+              console.log('submit');
+              this.props.addNonProfit(values)
+                .then(res => res && this.props.history.push("/search"))
+                .then(formikBag.setSubmitting(false));
             }}
             validationSchema={ Yup.object().shape({
               website: Yup.string()
@@ -31,8 +36,6 @@ class AddNonProfit extends React.Component {
               city: Yup.string()
                 .required("City is required"),
               zip: Yup.number()
-                .min(5, "Zip must be at least 5 character long")
-                .max(10, "You Zip is too long")
                 .required("Zip code is required")
             })}
           >
@@ -64,6 +67,9 @@ class AddNonProfit extends React.Component {
                               errors.website && touched.website && 'error'
                             }
                           />
+                          {errors.website && touched.website && (
+                            <div className="error-msg">{errors.website}</div>
+                          )}
                       </td>
                       </tr>
                       <tr className="mobile"><td>Description:</td></tr>
@@ -79,6 +85,9 @@ class AddNonProfit extends React.Component {
                               errors.description && touched.description && 'error'
                             }
                           >
+                          {errors.description && touched.description && (
+                            <div className="error-msg">{errors.description}</div>
+                          )}
                           </textarea>
                         </td>
                       </tr>
@@ -94,7 +103,10 @@ class AddNonProfit extends React.Component {
                             className={
                               errors.address && touched.address && 'error'
                             }
-                          /><br />
+                          />
+                          {errors.address && touched.address && (
+                            <div className="error-msg">{errors.address}</div>
+                          )}<br />
                           <input type="text" name="city"
                             placeholder="City"
                             value={values.city}
@@ -104,6 +116,9 @@ class AddNonProfit extends React.Component {
                               errors.city && touched.city && 'error'
                             }
                           />
+                          {errors.query && touched.query && (
+                            <div className="error-msg">{errors.query}</div>
+                          )}
                           <input type="text" name="zip"
                             placeholder="Zip"
                             value={values.zip}
@@ -113,6 +128,9 @@ class AddNonProfit extends React.Component {
                               errors.zip && touched.zip && 'error'
                             }
                           />
+                          {errors.zip && touched.zip && (
+                            <div className="error-msg">{errors.zip}</div>
+                          )}
                         </td>
                       </tr>
                     </tbody>
@@ -135,4 +153,8 @@ class AddNonProfit extends React.Component {
   }
 }
 
-export default AddNonProfit;
+const mapStateToProps = state => ({
+  error: state.query.error,
+  isQuerying: state.query.isQuerying
+})
+export default connect( mapStateToProps, { addNonProfit } )(AddNonProfit);
