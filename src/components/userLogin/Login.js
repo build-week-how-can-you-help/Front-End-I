@@ -56,7 +56,7 @@ class Login extends React.Component {
                     value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    autocomplete={false}
+                    autoComplete="on"
                     className={
                       errors.username && touched.username && 'error'
                     }
@@ -73,7 +73,7 @@ class Login extends React.Component {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    autocomplete={true}
+                    autoComplete="on"
                     className={
                       errors.password && touched.password && 'error'
                     }
