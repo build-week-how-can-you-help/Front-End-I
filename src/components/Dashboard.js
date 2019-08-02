@@ -4,12 +4,6 @@ import { getAllUsers } from '../store/actions';
 import Loader from 'react-loader-spinner';
 
 class Dashboard extends React.Component {
-  componentDidMount() {
-    // get user list
-    this.props.getAllUsers();
-    // get non-profit
-    
-  }
 
   render() {
     let sortedArr = [];
