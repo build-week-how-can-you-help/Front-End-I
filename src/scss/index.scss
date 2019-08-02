@@ -1,3 +1,4 @@
+@import url('//use.fontawesome.com/releases/v5.10.0/css/all.css');
 @import './vars';
 
 * { box-sizing: border-box; }
@@ -25,6 +26,10 @@ button {
   }
 }
 
+main {
+  padding-bottom: 1.25rem;
+}
+
 .error {
   border-color: #C00 !important;
 }
@@ -37,9 +42,25 @@ button {
   left: 0.625em;
 }
 
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 43.75em) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
+
 @import './App';
 @import './nav';
+@import './footer';
 @import './login';
 @import './logout';
 @import './dashboard';
 @import './nonProfitList';
+@import './userDisplay'

@@ -1,16 +1,27 @@
+@import './mixins';
+
 .login {
   min-width: 100vw;
   min-height: calc(100vh - 2.5rem);
   display: flex;
+  flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+
+  .logo {
+    $measure: 300px;
+    $margin: 1.875em;
+    width: $measure;
+    height: $measure;
+    margin: 0 $margin $margin 0;
+  }
 
   .login-container {
     margin-bottom: 2.5rem;
     padding: 2.063em 2.063em 2.75rem;
     background: #fff;
     border: 1px solid $color-primary;
-    border-radius: 6px;
+    @include rounded-corners;
 
     h1 {
       margin: 0 auto 2.5rem;
@@ -23,8 +34,8 @@
 
       button, input {
         width: 100%;
-        border-radius: 6px;
         border: none;
+        @include rounded-corners;
       }
 
       .input-container {
