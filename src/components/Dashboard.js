@@ -6,14 +6,12 @@ import Loader from 'react-loader-spinner';
 class Dashboard extends React.Component {
   componentDidMount() {
     // get user list
-    this.props.getAllUsers()
-      .then( res => console.log('GOT USERS'));
+    this.props.getAllUsers();
     // get non-profit
     
   }
 
   render() {
-    console.log('users',this.props.userList);
     let sortedArr = [];
     return (
       <main className="dashboard">
@@ -28,7 +26,7 @@ class Dashboard extends React.Component {
                   }),
                   sortedArr = sortedArr.splice(0,5),
                   sortedArr.map( (item, i) => {
-                    console.log("item",item);
+                    console.log(item)
                     return (
                       <li key={`user-${i.toString().padStart(2,"0")}`}>
                         <dl>

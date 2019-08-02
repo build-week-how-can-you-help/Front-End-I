@@ -1,3 +1,4 @@
+@import url('//use.fontawesome.com/releases/v5.10.0/css/all.css');
 @import './vars';
 
 * { box-sizing: border-box; }
@@ -39,6 +40,20 @@ main {
   font-style: italic;
   bottom: -1.375em;
   left: 0.625em;
+}
+
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 43.75em) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
 }
 
 @import './App';

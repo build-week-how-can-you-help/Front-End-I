@@ -24,7 +24,7 @@ class Login extends React.Component {
             onSubmit={ (values, formikBag) => {
               formikBag.setSubmitting(true);
               this.props.loginHandler(values)
-                .then(res => res && formikBag.setSubmitting(false), this.props.history.push("/home"));
+                .then(res => res && this.props.history.push("/home"));
             }}
             validationSchema={ Yup.object().shape({
               username: Yup.string()
@@ -56,6 +56,7 @@ class Login extends React.Component {
                     value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    autocomplete={false}
                     className={
                       errors.username && touched.username && 'error'
                     }
@@ -72,6 +73,7 @@ class Login extends React.Component {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    autocomplete={true}
                     className={
                       errors.password && touched.password && 'error'
                     }
@@ -80,6 +82,9 @@ class Login extends React.Component {
                     <div className="error-msg">{errors.password}</div>
                   )}
                 </div>
+                { this.props.error &&
+                  <div className="error-msg">Something went wrong.</div>
+                }
                 <button type="submit" disabled={isSubmitting}>
                   Login
                 </button>
@@ -94,8 +99,8 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.error,
-  isLoggingIn: state.isLoggingIn,
-  nonProfitList: state.nonProfitList
+  error: state.login.error,
+  isLoggingIn: state.login.isLoggingIn,
+  nonProfitList: state.login.nonProfitList
 })
 export default connect( mapStateToProps, { loginHandler } )(Login);

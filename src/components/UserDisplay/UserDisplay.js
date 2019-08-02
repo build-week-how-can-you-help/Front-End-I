@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
 
 import { getAllUsers } from '../../store/actions';
 
@@ -32,6 +33,7 @@ class UserDisplay extends React.Component {
       <main className="display-user">
       <div className="search-bar">
         <input name="search" type="text" placeholder="Enter username to search for" onChange={this.searchUserList} />
+        <button><Link to="/adduser">Add User</Link></button>
       </div>
       <section>
          {this.state.sortedList.length > 0 ? (
@@ -43,7 +45,9 @@ class UserDisplay extends React.Component {
              return <SingleUser userInfo={user} key={`user-${i.toString().padStart(2,"0")}`} />
            })
          ) : (
-          <Loader type="Grid" color="#FFCE00" height={80} width={80} />
+           <div className="loading">
+             <Loader type="Grid" color="#FFCE00" height={80} width={80} />
+           </div>
          )}
       </section>
       </main>
